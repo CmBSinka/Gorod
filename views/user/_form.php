@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
-
+use yii\widgets\Pjax;
 /** @var yii\web\View $this */
 /** @var app\models\User $model */
 /** @var yii\widgets\ActiveForm $form */
@@ -16,9 +16,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email', ['enableAjaxValidation' => true])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
@@ -29,7 +27,7 @@ use yii\bootstrap5\ActiveForm;
     <!--<?= $form->field($model, 'is_admin')->textInput() ?>-->
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохрания', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
