@@ -11,11 +11,13 @@ class RegForm extends User
     public function rules()
     {
         return [
-            [['FIO', 'email', 'login', 'password'], 'required'],
+            [['FIO', 'email', 'login', 'password', 'confirm_password', 'agree'], 'required'],
             [['FIO'], 'match', 'pattern'=>'/^[А-ЯЁа-яё\s\-]{1,}$/u', 'message'=>'Используйте минимум 1 русскую букву, пробел или тире'],
             [['login'], 'match', 'pattern'=>'/^[A-Za-z]*$/u', 'message'=>'Используйте только латинские буквы'],
             [['login'], 'unique'],
             [['email'], 'email'],
+            [['confirm_password'], 'compare', 'compareAttribute'=>'password'],
+            [['agree'], 'compare', 'compareValue'=>true, 'message'=>''],
             [['is_admin'], 'integer'],
             [['FIO', 'email', 'login' ,'password'], 'string', 'max' => 255],
         ];

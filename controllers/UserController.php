@@ -9,6 +9,7 @@ use yii\bootstrap5\ActiveForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -71,6 +72,11 @@ class UserController extends Controller
     {
         $model = new RegForm();
 
+        if (\Yii::$app->request->isAjax && $model->load(\Yii::$app->request->post())) 
+        {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
