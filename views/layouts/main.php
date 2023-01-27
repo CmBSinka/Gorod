@@ -30,33 +30,49 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <?php $this->beginBody() ?>
 
 <header id="header">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Главная страница', 'url' => ['/site/index']],
+<?php
+    if (Yii::$app->user->isGuest){
+        $items=[
             ['label' => 'О нас', 'url' => ['/site/about']],
-            ['label' => 'Связь', 'url' => ['/site/contact']],
+            ['label' => 'Где нас найти', 'url' => ['/site/contact']],
             ['label' => 'Регистрация', 'url' => ['/user/create']],
-            Yii::$app->user->isGuest
-                ? ['label' => 'Вход', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-        ]
+            ['label' => 'Вход', 'url' => ['/site/login']]
+        ];}
+else {
+    Yii::$app->user->identity->is_admin==1 ?
+    (
+        $items=[
+            ['label' => 'Панель администратора', 'url' => ['/admin/index']],
+    ])
+    :
+    ($items=[
+        ['label' => 'О нас', 'url' => ['/site/about']],
+        ['label' => 'Где нас найти', 'url' => ['/site/contact']],
+        ['label' => 'Заявки', 'url' => ['/request/index']],
+        ['label' => 'Личный кабинет', 'url' => ['/user/view?id='.Yii::$app->user->identity->id]],
+]);
+array_push($items, '<li class="nav-item">'
+ . Html::beginForm(['/site/logout'])
+ . Html::submitButton(
+ 'Logout (' . Yii::$app->user->identity->email . ')',
+ ['class' => 'nav-link btn btn-link logout']
+ )
+ . Html::endForm()
+ . '</li>');
+
+}
+NavBar::begin([
+    'brandLabel' => Yii::$app->name,
+    'brandUrl' => Yii::$app->homeUrl,
+    'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+    ]);
+    echo
+    Nav::widget([
+    'options' => ['class' => 'navbar-nav'],
+    'items' => $items
     ]);
     NavBar::end();
-    ?>
+ ?>       
 </header>
 
 <main id="main" class="flex-shrink-0" role="main">
