@@ -29,12 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'request_name',
-            'request_description',
-            'category_id',
-            'user_id',
-            //'photo',
+            //'id',
+            ['attribute'=>'Описание заявки', 'value'=> function($data){return $data->getRequest()->One()->request_name;}],
+            ['attribute'=>'Описание заявки', 'value'=> function($data){return $data->getRequest()->One()->request_description;}],
+            //'category_id',
+            //'user_id',
+            ['attribute'=>'Фото', 'format'=>'html', 'value'=> function($data){return "<img src='{$data->photo}' alt='photo' style='width: 70px;'>";}],
             //'data',
             //'status',
             [

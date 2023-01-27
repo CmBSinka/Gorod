@@ -92,14 +92,15 @@ class RequestController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost) {
+            $model->load($this->request->post());
+            $model->image = UploadedFile::getInstance($model, 'image');
+            $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->image->extension;
+            $model->image->saveAs(\Yii::$app->basePath . $file_name);
+            $model->image = $file_name;
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**

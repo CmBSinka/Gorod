@@ -48,7 +48,7 @@ else {
     ($items=[
         ['label' => 'О нас', 'url' => ['/site/about']],
         ['label' => 'Где нас найти', 'url' => ['/site/contact']],
-        ['label' => 'Заявки', 'url' => ['/request/index']],
+        ['label' => 'Заявки', 'url' => ['/request/index?RequestSearch[user_id]='.Yii::$app->user->identity->id]],
         ['label' => 'Личный кабинет', 'url' => ['/user/view?id='.Yii::$app->user->identity->id]],
 ]);
 array_push($items, '<li class="nav-item">'
@@ -86,6 +86,7 @@ NavBar::begin([
 </main>
 
 <footer id="footer" class="mt-auto py-3 bg-light">
+    <script scr='/web/JS/Code.js'></script>
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>

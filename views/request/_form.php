@@ -16,15 +16,15 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'request_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+     <?= $form->field($model, 'category_id')->textInput() ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <!-- <?= $form->field($model, 'user_id')->textInput() ?>-->
 
-    <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'photo')->fileInput() ?>
 
-    <?= $form->field($model, 'data')->textInput() ?>
+    <!--<?= $form->field($model, 'data')->textInput() ?>-->
 
-    <?= $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '']) ?>
+    <!-- <?= $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '']) ?>-->
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
