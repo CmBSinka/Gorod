@@ -39,6 +39,7 @@ class Request extends \yii\db\ActiveRecord
             [['data'], 'safe'],
             [['status'], 'required'],
             [['status'], 'string'],
+            [['photo'], 'file',  'extensions' => ['png', 'jpg', 'gif'],'skipOnEmpty' => false ],
             [['request_name', 'request_description', 'photo'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -52,8 +53,8 @@ class Request extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'request_name' => 'Request Name',
-            'request_description' => 'Request Description',
+            'request_name' => 'Название запроса',
+            'request_description' => 'Описание запроса',
             'category_id' => 'Category ID',
             'user_id' => 'User ID',
             'photo' => 'Photo',

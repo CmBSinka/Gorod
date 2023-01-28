@@ -54,7 +54,7 @@ else {
 array_push($items, '<li class="nav-item">'
  . Html::beginForm(['/site/logout'])
  . Html::submitButton(
- 'Logout (' . Yii::$app->user->identity->email . ')',
+ 'Logout (' . Yii::$app->user->identity->login . ')',
  ['class' => 'nav-link btn btn-link logout']
  )
  . Html::endForm()

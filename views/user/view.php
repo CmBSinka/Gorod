@@ -45,6 +45,10 @@ foreach ($requests as $request) {
             echo "<td>" .  $request->getRequest()->one()->request_name ."</td>";
             echo "<td>" .  $request->getRequest()->one()->data ."</td>";
             echo "<td>" .  $request->status ."</td>";
+            ?> <td>
+            <button class="btn btn-danger">☓</button>
+        </td>
+        <?php
     echo "</tr>";
 }
  ?>

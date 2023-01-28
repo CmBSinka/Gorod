@@ -7,6 +7,7 @@ use app\models\RequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -68,15 +69,18 @@ class RequestController extends Controller
     public function actionCreate()
     {
         $model = new Request();
-
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $model->load($this->request->post());
+            $model->photo=UploadedFile::getInstance($model,'photo');
+            $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->photo->extension;
+            $model->photo->saveAs(\Yii::$app->basePath . $file_name);
+            $model->photo=$file_name;
+            if ($model->save(false)) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -94,10 +98,10 @@ class RequestController extends Controller
         $model = $this->findModel($id);
         if ($this->request->isPost) {
             $model->load($this->request->post());
-            $model->image = UploadedFile::getInstance($model, 'image');
-            $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->image->extension;
-            $model->image->saveAs(\Yii::$app->basePath . $file_name);
-            $model->image = $file_name;
+            $model->photo = UploadedFile::getInstance($model, 'photo');
+            $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->photo->extension;
+            $model->photo->saveAs(\Yii::$app->basePath . $file_name);
+            $model->photo = $file_name;
             $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
