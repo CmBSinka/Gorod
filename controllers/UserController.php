@@ -58,6 +58,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        if(\Yii::$app->user->isGuest)
+        {
+            return $this->redirect(['/site/login']);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

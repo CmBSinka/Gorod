@@ -31,9 +31,12 @@ $this->title = $model->id;
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th scope="col">Название</th>
             <th scope="col">Дата</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Категория</th>
             <th scope="col">Статус</th>
+            <th scope="col">Управление</th>
         </tr>
         </thead>
         <tbody>
@@ -42,8 +45,10 @@ $this->title = $model->id;
   $requests=\app\models\Request::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
 foreach ($requests as $request) {
     echo "<tr>";
-            echo "<td>" .  $request->getRequest()->one()->request_name ."</td>";
             echo "<td>" .  $request->getRequest()->one()->data ."</td>";
+            echo "<td>" .  $request->getRequest()->one()->request_name ."</td>";
+            echo "<td>" .  $request->getRequest()->one()->request_description ."</td>";
+            echo "<td>" .  $request->getRequest()->one()->category_id ."</td>";
             echo "<td>" .  $request->status ."</td>";
             ?> <td>
             <button class="btn btn-danger">☓</button>
@@ -52,4 +57,6 @@ foreach ($requests as $request) {
     echo "</tr>";
 }
  ?>
+        </tbody>
+    </table>
 </div>
