@@ -51,7 +51,13 @@ foreach ($requests as $request) {
             echo "<td>" .  $request->getRequest()->one()->category_id ."</td>";
             echo "<td>" .  $request->status ."</td>";
             ?> <td>
-            <button class="btn btn-danger">☓</button>
+            <?= Html::a('☓', ['../request/delete', 'id' => $request->getRequest()->one()->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Вы уверены что хотите удалить заявку?',
+                'method' => 'post',
+            ],
+        ]) ?>
         </td>
         <?php
     echo "</tr>";

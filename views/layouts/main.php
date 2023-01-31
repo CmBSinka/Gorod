@@ -48,7 +48,6 @@ else {
     ($items=[
         ['label' => 'О нас', 'url' => ['/site/about']],
         ['label' => 'Где нас найти', 'url' => ['/site/contact']],
-        ['label' => 'Заявки', 'url' => ['/request/index?RequestSearch[user_id]='.Yii::$app->user->identity->id]],
         ['label' => 'Личный кабинет', 'url' => ['/user/view?id='.Yii::$app->user->identity->id]],
 ]);
 array_push($items, '<li class="nav-item">'

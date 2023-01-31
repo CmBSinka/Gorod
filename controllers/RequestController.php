@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
+
 /**
  * RequestController implements the CRUD actions for Request model.
  */
@@ -25,7 +26,7 @@ class RequestController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'GET'],
                     ],
                 ],
             ]
@@ -75,6 +76,7 @@ class RequestController extends Controller
             $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->photo->extension;
             $model->photo->saveAs(\Yii::$app->basePath . $file_name);
             $model->photo=$file_name;
+            $model->user_id = \Yii::$app->user->identity->id;
             if ($model->save(false)) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -118,7 +120,7 @@ class RequestController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/user/view?id='.\Yii::$app->user->identity->id]);
     }
 
     /**
