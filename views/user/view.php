@@ -42,8 +42,9 @@ $this->title = $model->id;
         <tbody>
             
 <?php
-  $requests=\app\models\Request::find()->where(['user_id'=>Yii::$app->user->identity->id])->all();
-foreach ($requests as $request) {
+  $requests=\app\models\Request::find()->where(['user_id'=>Yii::$app->user->identity->id])->orderBy(['data'=>SORT_DESC])->all();
+foreach ($requests as $request) 
+{
     echo "<tr>";
             echo "<td>" .  $request->getRequest()->one()->data ."</td>";
             echo "<td>" .  $request->getRequest()->one()->request_name ."</td>";
@@ -51,13 +52,18 @@ foreach ($requests as $request) {
             echo "<td>" .  $request->getRequest()->one()->category_id ."</td>";
             echo "<td>" .  $request->status ."</td>";
             ?> <td>
-            <?= Html::a('☓', ['../request/delete', 'id' => $request->getRequest()->one()->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены что хотите удалить заявку?',
-                'method' => 'post',
-            ],
-        ]) ?>
+            <?php
+            if ($request->status == 'Новая') {
+                echo
+                    Html::a('☓', ['../request/delete', 'id' => $request->getRequest()->one()->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => 'Вы уверены что хотите удалить заявку?',
+                            'method' => 'post',
+                        ],
+                    ]);
+            }
+            ?>
         </td>
         <?php
     echo "</tr>";
