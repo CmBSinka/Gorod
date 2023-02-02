@@ -9,7 +9,6 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
-
 /**
  * RequestController implements the CRUD actions for Request model.
  */
@@ -87,7 +86,6 @@ class RequestController extends Controller
             'model' => $model,
         ]);
     }
-
     /**
      * Updates an existing Request model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -98,6 +96,11 @@ class RequestController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ((\Yii::$app->user->isGuest) || (\Yii::$app->user->identity->is_admin==0))
+        {
+            $this->goBack();
+            return false;
+            }
         if ($this->request->isPost) {
             $model->load($this->request->post());
             $model->photo = UploadedFile::getInstance($model, 'photo');
@@ -138,4 +141,18 @@ class RequestController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionAdminp()
+    {
+        if ((\Yii::$app->user->isGuest) || (\Yii::$app->user->identity->is_admin==0)){
+            $this->redirect(['site/login']);
+            return false;
+            }
+        $searchModel = new RequestSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('adminp', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+     }
 }

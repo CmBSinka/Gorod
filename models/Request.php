@@ -13,6 +13,7 @@ use Yii;
  * @property int|null $category_id
  * @property int|null $user_id
  * @property string|null $photo
+ * @property string|null $photo_after
  * @property string|null $data
  * @property string $status
  *
@@ -37,10 +38,8 @@ class Request extends \yii\db\ActiveRecord
         return [
             [['category_id', 'user_id'], 'integer'],
             [['data'], 'safe'],
-            [['status'], 'required'],
             [['status'], 'string'],
-            [['photo'], 'file',  'extensions' => ['png', 'jpg', 'gif'],'skipOnEmpty' => false ],
-            [['request_name', 'request_description', 'photo'], 'string', 'max' => 255],
+            [['request_name', 'request_description', 'photo', 'photo_after'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -57,9 +56,9 @@ class Request extends \yii\db\ActiveRecord
             'request_description' => 'Описание запроса',
             'category_id' => 'Category ID',
             'user_id' => 'User ID',
-            'photo' => 'Photo',
-            'data' => 'Data',
-            'status' => 'Status',
+            'photo' => 'Фото',
+            'data' => 'Дата',
+            'status' => 'Статус',
         ];
     }
 

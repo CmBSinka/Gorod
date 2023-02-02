@@ -1,9 +1,8 @@
 <?php
 /** @var yii\web\View $this */
 ?>
-<h1>admin/index</h1>
+<h1>Панель администратора</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+<p><a href="/category">Управление категориями</a></p>
+<p><a href="/user">Управление пользователями</a></p>
+<p><a href="/request/">Управление заявками</a></p>

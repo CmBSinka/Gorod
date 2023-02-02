@@ -6,6 +6,8 @@ use yii\widgets\Pjax;
 /** @var yii\web\View $this */
 /** @var app\models\User $model */
 /** @var yii\widgets\ActiveForm $form */
+
+
 ?>
 
 <div class="user-form">

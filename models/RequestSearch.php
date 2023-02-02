@@ -18,7 +18,7 @@ class RequestSearch extends Request
     {
         return [
             [['id', 'category_id', 'user_id'], 'integer'],
-            [['request_name', 'request_description', 'photo', 'data', 'status'], 'safe'],
+            [['request_name', 'request_description', 'photo', 'photo_after', 'data', 'status'], 'safe'],
         ];
     }
 
@@ -67,6 +67,7 @@ class RequestSearch extends Request
         $query->andFilterWhere(['like', 'request_name', $this->request_name])
             ->andFilterWhere(['like', 'request_description', $this->request_description])
             ->andFilterWhere(['like', 'photo', $this->photo])
+            ->andFilterWhere(['like', 'photo_after', $this->photo_after])
             ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;

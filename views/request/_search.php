@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'photo') ?>
 
+    <?php // echo $form->field($model, 'photo_after') ?>
+
     <?php // echo $form->field($model, 'data') ?>
 
     <?php // echo $form->field($model, 'status') ?>

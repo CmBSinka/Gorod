@@ -131,4 +131,11 @@ class CategoryController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function beforeAction($action)
+    {
+    if ((\Yii::$app->user->isGuest) || (\Yii::$app->user->identity->is_admin==0)){
+    $this->goBack();
+    return false;
+    } else return true;
+    }
 }

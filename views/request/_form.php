@@ -6,6 +6,11 @@ use yii\bootstrap5\ActiveForm;
 /** @var yii\web\View $this */
 /** @var app\models\Request $model */
 /** @var yii\widgets\ActiveForm $form */
+$li=[]; $requests=\app\models\Request::find()->all();
+ foreach ($requests as $request)
+{ 
+$li[$request->id]=$request->request_name; 
+}
 ?>
 
 <div class="request-form">
@@ -16,7 +21,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'request_description')->textInput(['maxlength' => true]) ?>
 
-     <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList($li)?>
 
     <!-- <?= $form->field($model, 'user_id')->textInput() ?>-->
 
