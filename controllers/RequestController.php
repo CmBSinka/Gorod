@@ -100,7 +100,7 @@ class RequestController extends Controller
         {
             $this->goBack();
             return false;
-            }
+        }
         if ($this->request->isPost) {
             $model->load($this->request->post());
             $model->photo = UploadedFile::getInstance($model, 'photo');
@@ -110,6 +110,9 @@ class RequestController extends Controller
             $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
