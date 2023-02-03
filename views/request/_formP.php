@@ -25,15 +25,17 @@ $li[$request->id]=$request->request_name;
 
     <!-- <?= $form->field($model, 'user_id')->textInput() ?>-->
 
-    <?= $form->field($model, 'photo_after')->fileInput(['required'=>true]) ?>
+    <?= $model->status=='Новая' ? $form->field($model, 'photo_after')->fileInput(['required'=>true]) : $form->field($model, 'photo_after')->fileInput(['required'=>false]) ?>
 
     <!--<?= $form->field($model, 'data')->textInput() ?>-->
 
      <?= $model->status=='Новая' ? $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '', 'disabled'=>false]): 
        $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '', 'disabled'=>true])?>
 
+    <?= $model->status=='Новая' ? $form->field($model, 'reason')->textInput(['required'=>true]) : $form->field($model, 'reason')->textInput(['required'=>false]) ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

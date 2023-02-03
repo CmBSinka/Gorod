@@ -31,8 +31,10 @@ $li[$request->id]=$request->request_name;
 
     <!-- <?= $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '']) ?>-->
 
+    <?= $form->field($model, 'reason')->textInput() ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

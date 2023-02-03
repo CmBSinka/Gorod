@@ -16,6 +16,7 @@ use Yii;
  * @property string|null $photo_after
  * @property string|null $data
  * @property string $status
+ * @property string|null $reason
  *
  * @property Category $category
  * @property User $user
@@ -39,7 +40,10 @@ class Request extends \yii\db\ActiveRecord
             [['category_id', 'user_id'], 'integer'],
             [['data'], 'safe'],
             [['status'], 'string'],
-            [['request_name', 'request_description', 'photo', 'photo_after'], 'string', 'max' => 255],
+            [['request_name', 'request_description', 'photo', 'photo_after', 'reason'], 'string', 'max' => 255],
+            [['request_name', 'request_description', 'category_id'], 'required'],
+            [['photo'], 'file',  'extensions' => ['png', 'jpg', 'gif'],'skipOnEmpty' => false ],
+            [['photo_after'], 'file',  'extensions' => ['png', 'jpg', 'gif'],'skipOnEmpty' => false ],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -57,8 +61,10 @@ class Request extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
             'user_id' => 'User ID',
             'photo' => 'Фото',
+            'photo_after' => 'Фото после',
             'data' => 'Дата',
             'status' => 'Статус',
+            'reason' => 'Причина',
         ];
     }
 
@@ -86,3 +92,4 @@ class Request extends \yii\db\ActiveRecord
         return $this->hasOne(Request::class, ['id' => 'id']);
     }
 }
+
