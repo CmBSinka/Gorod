@@ -103,10 +103,10 @@ class RequestController extends Controller
         }
         if ($this->request->isPost) {
             $model->load($this->request->post());
-            $model->photo = UploadedFile::getInstance($model, 'photo');
-            $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->photo->extension;
-            $model->photo->saveAs(\Yii::$app->basePath . $file_name);
-            $model->photo = $file_name;
+            $model->photo_after = UploadedFile::getInstance($model, 'photo_after');
+            $file_name = '/web/photo/' . \Yii::$app->getSecurity()->generateRandomString(50) . '.' . $model->photo_after->extension;
+            $model->photo_after->saveAs(\Yii::$app->basePath . $file_name);
+            $model->photo_after = $file_name;
             $model->save(false);
             return $this->redirect(['view', 'id' => $model->id]);
         }

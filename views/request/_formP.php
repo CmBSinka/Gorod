@@ -29,8 +29,8 @@ $li[$request->id]=$request->request_name;
 
     <!--<?= $form->field($model, 'data')->textInput() ?>-->
 
-     <?= $model->status=='Новая' ? $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '', 'disabled'=>false]): 
-       $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоенная' => 'Отклоенная', ], ['prompt' => '', 'disabled'=>true])?>
+     <?= $model->status=='Новая' ? $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоненная' => 'Отклоненная', ], ['prompt' => '', 'disabled'=>false]): 
+       $form->field($model, 'status')->dropDownList([ 'Новая' => 'Новая', 'Решенная' => 'Решенная', 'Отклоненная' => 'Отклоненная', ], ['prompt' => '', 'disabled'=>true])?>
 
     <?= $model->status=='Новая' ? $form->field($model, 'reason')->textInput(['required'=>true]) : $form->field($model, 'reason')->textInput(['required'=>false]) ?>
 

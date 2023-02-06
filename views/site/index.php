@@ -1,53 +1,61 @@
 <?php
+use app\models\Request;
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+$this->title = 'Мой город';
 ?>
+<head>
+    
+<link type="image/x-icon" href="web/photo/favicon.ico" rel="shortcut icon">
+<link type="Image/x-icon" href="web/photo/favicon.ico" rel="icon">
+
+</head>
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
+        <img src='web/photo/favicon.ico' alt='image'></a>
+        <h1 class="display-4">Сайт городских проблем "Мой город"</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Тут вы можете оставить наши заявки для решения проблем.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        
     </div>
 
     <div class="body-content">
+   <?php 
+   $requests = Request::find()->all();
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+foreach ($requests as $request) 
+{
+    if ($request->status = 'Решенная') 
+    {
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+        echo "<div class='container py-3'>";
+        echo "<div class='row-cols-1 row-cols-md-2 g-5 card-img-top hover-image-scale'  style='width: 66%; min-width: 501px;'>
+ <div class='card col change-photos hover-image-scale'>
+    <div class='change-photo hover-image-scale'>
+ <img src='{$request->photo}' 'max-height: 400px;' alt='image'></a>
+    </div>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+    <div class='card-body change-photo'>
+      <img src='{$request->photo_after}' alt='photo' class='hover-image-scale'>
+    </div>
+ <div class='card-body'>
+ <h5 class='card-title'>{$request->request_name}</h5>
+ <p class='card-text'>{$request->data}</p>
+ <p class='text-danger'>{$request->getCategory()->one()->name}</p>
+ </div>
+ </div>
+ </div>
+ </div>";
+    }
+}
+?>
+<link rel="stylesheet" href="../../web/assets/css/css.css">
+<html>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
 
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
 
     </div>
 </div>

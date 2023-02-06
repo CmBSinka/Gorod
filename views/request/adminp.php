@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'category_id',
         'user_id',
         ['attribute'=>'Фото', 'format'=>'html', 'value'=> function($data){return "<img src='{$data->photo}' alt='photo' style='width: 70px;'>";}],
-        'photo_after',
+        ['attribute'=>'Фото после', 'format'=>'html', 'value'=> function($data){return "<img src='{$data->photo_after}' alt='photo_after' style='width: 70px;'>";}],
         'data',
         'status',
         'reason',
